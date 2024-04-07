@@ -3,9 +3,10 @@ pipeline {
     stages {
         stage("git checkout") {
             steps {
-                script{
-                git url: 'https://github.com/Jaganraj-dev/maven.git'
-                echo "-----Start checkout execution----"
+                script {
+                    // Checkout the code from the Git repository
+                    git url: 'https://github.com/Jaganraj-dev/maven.git'
+                    echo "-----Start checkout execution----"
                 }
             }
             post {
@@ -22,23 +23,26 @@ pipeline {
         }
         stage("maven compile checkout") {
             steps {
-                script{
-                sh 'mvn clean compile'
-                echo "-----maven clean compile----"
+                script {
+                    // Clean and compile the Maven project
+                    sh 'mvn clean compile'
+                    echo "-----maven clean compile----"
                 }
             }
         }
         stage("maven test checkout") {
             steps {
-                script{
-                sh 'mvn test'
-                echo "-----run maven test----"
+                script {
+                    // Run Maven tests
+                    sh 'mvn test'
+                    echo "-----run maven test----"
                 }
             }
         }
     }
     post {
         always {
+            // Trigger another Jenkins job as a post-build action
             build job: 'MyMavenProject', wait: false
             echo "---pipeline - always---"
         }
