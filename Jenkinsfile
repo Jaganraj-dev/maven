@@ -3,8 +3,10 @@ pipeline {
     stages {
         stage("git checkout") {
             steps {
-                git(url: 'https://github.com/Jaganraj-dev/maven.git')
+                script{
+                git url: 'https://github.com/Jaganraj-dev/maven.git'
                 echo "-----Start checkout execution----"
+                }
             }
             post {
                 always {
@@ -20,14 +22,18 @@ pipeline {
         }
         stage("maven compile checkout") {
             steps {
+                script{
                 sh 'mvn clean compile'
                 echo "-----maven clean compile----"
+                }
             }
         }
         stage("maven test checkout") {
             steps {
+                script{
                 sh 'mvn test'
                 echo "-----run maven test----"
+                }
             }
         }
     }
