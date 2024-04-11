@@ -1,16 +1,15 @@
 pipeline {
     agent any
-      tools {
+    
+    tools {
         maven 'Maven3'
     }
+    
     stages {
         stage("git checkout") {
             steps {
-                script {
-                    // Checkout the code from the Git repository
-                    git url: 'https://github.com/Jaganraj-dev/maven.git'
-                    echo "-----Start checkout execution----"
-                }
+                git url: 'https://github.com/Jaganraj-dev/maven.git'
+                echo "-----Start checkout execution----"
             }
             post {
                 always {
@@ -26,26 +25,20 @@ pipeline {
         }
         stage("maven compile checkout") {
             steps {
-                script {
-                    // Clean and compile the Maven project
-                    sh 'mvn clean compile'
-                    echo "-----maven clean compile----"
-                }
+                sh 'mvn clean compile package'
+                echo "-----maven clean compile & package----"
             }
         }
         stage("maven test checkout") {
             steps {
-                script {
-                    // Run Maven tests
-                    sh 'mvn test'
-                    echo "-----run maven test----"
+                sh 'mvn test'
+                echo "-----run maven test----"
                 }
             }
         }
     }
     post {
         always {
-            // Trigger another Jenkins job as a post-build action
             build job: 'MyMavenProject', wait: false
             echo "---pipeline - always---"
         }
