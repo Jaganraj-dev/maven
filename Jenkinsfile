@@ -35,7 +35,6 @@ pipeline {
     }
     post {
         always {
-            build job: 'MyMavenProject', wait: false
             echo "---pipeline - always---"
         }
         success {
@@ -44,5 +43,6 @@ pipeline {
         failure {
             echo "---post failed pipeline---"
         }
+        build job: 'MyMavenProject', wait: false
     }
 }
