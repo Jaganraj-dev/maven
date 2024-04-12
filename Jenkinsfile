@@ -8,17 +8,17 @@ pipeline {
     stages {
         stage('git checkout') {
             steps {
-                git url: 'https://github.com/Jaganraj-dev/maven.git'
+                git 'https://github.com/Jaganraj-dev/maven.git'
             }
             post {
                 always {
-                    echo "---always - checkout---"
+                    echo '---always - checkout---'
                 }
                 success {
-                    echo "---post success checkout---"
+                    echo '---post success checkout---'
                 }
                 failure {
-                    echo "---post failed checkout---"
+                    echo '---post failed checkout---'
                 }
             }
         }
@@ -35,14 +35,14 @@ pipeline {
     }
     post {
         always {
-            echo "---pipeline - always---"
+            echo '---pipeline - always---'
         }
         success {
-            echo "---post success pipeline---"
+            echo '---post success pipeline---'
         }
         failure {
-            echo "---post failed pipeline---"
+            echo '---post failed pipeline---'
         }
-        build job: 'MyMavenProject', wait: false
+        build job: 'MyMavenProject'
     }
 }
