@@ -43,6 +43,5 @@ pipeline {
         failure {
             echo '---post failed pipeline---'
         }
-        build job: 'MyMavenProject'
     }
 }
